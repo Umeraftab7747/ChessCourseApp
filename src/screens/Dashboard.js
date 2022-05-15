@@ -5,11 +5,31 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  FlatList,
 } from "react-native";
 import React from "react";
 import { KeyboardAvoidingScrollView } from "react-native-keyboard-avoiding-scroll-view";
 import { w, h } from "react-native-responsiveness";
 import { black, Yellow } from "../utils/color";
+
+// components
+import AppCard from "../components/AppCard";
+
+// data
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+];
 
 const Dashboard = () => {
   return (
@@ -34,6 +54,13 @@ const Dashboard = () => {
       </View>
       {/* Searchbar */}
       <Text style={styles.ContinueText}>Continue to watch previous class</Text>
+
+      <FlatList
+        data={DATA}
+        renderItem={() => <AppCard />}
+        numColumns={2}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };
