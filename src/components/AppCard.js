@@ -3,14 +3,14 @@ import React from "react";
 import { w, h } from "react-native-responsiveness";
 import { black, Yellow } from "../utils/color";
 
-const AppCard = () => {
+const AppCard = ({ onPress }) => {
   return (
     <View style={styles.Maincontainer}>
       <View style={styles.ImageContainer}>
         <Text>IMAGE</Text>
       </View>
       <Text style={styles.TitleText}>Online chess trainer 1200</Text>
-      <TouchableOpacity style={styles.Button}>
+      <TouchableOpacity onPress={onPress} style={styles.Button}>
         <Text style={styles.BtnText}>Add to cart</Text>
       </TouchableOpacity>
     </View>

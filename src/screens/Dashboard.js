@@ -31,7 +31,7 @@ const DATA = [
   },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   return (
     <View style={styles.MainContainer}>
       {/* Top Header */}
@@ -57,7 +57,13 @@ const Dashboard = () => {
 
       <FlatList
         data={DATA}
-        renderItem={() => <AppCard />}
+        renderItem={() => (
+          <AppCard
+            onPress={() => {
+              navigation.navigate("ProductDetail");
+            }}
+          />
+        )}
         numColumns={2}
         keyExtractor={(item) => item.id}
       />

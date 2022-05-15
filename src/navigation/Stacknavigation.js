@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import Signup from "../screens/Signup";
 import Forget from "../screens/Forget";
 import Dashboard from "../screens/Dashboard";
+import ProductDetail from "../screens/ProductDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ function Stacknavigation() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Forget" component={Forget} />
+        <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Splash" component={Splash} />
       </Stack.Navigator>
