@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
           />
           <Appbutton
             onPress={() => {
-              navigation.navigate("Dashboard");
+              navigation.navigate("MyTabs");
             }}
             name={"Sign In"}
           />
