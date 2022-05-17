@@ -14,16 +14,18 @@ import ProductDetail from "../screens/ProductDetail";
 import MyTabs from "./BottomNavigation";
 import { auth, db } from "../Database/firebaseConfig";
 import { setBooks, setChat } from "../store/projectSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../store/authSlice";
 const Stack = createNativeStackNavigator();
 
 function Stacknavigation() {
 	const dispatch = useDispatch();
+	const { isAuth } = useSelector((state) => state.auth);
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
-			const uid = user.uid;
-			if (uid) {
+			if (user) {
+				const uid = user.uid;
+
 				db.collection("userinfo")
 					.doc(uid)
 					.get()
@@ -34,6 +36,20 @@ function Stacknavigation() {
 									userid: uid,
 									email: doc.data().email,
 									name: doc.data().name,
+								},
+							})
+						);
+					});
+				db.collection("chatSupport")
+					.doc(uid)
+					.onSnapshot((doc) => {
+						dispatch(
+							setChat({
+								mesg: {
+									customer: doc.data().customer,
+									email: doc.data().email,
+									admin: doc.data().admin,
+									messages: doc.data().messages,
 								},
 							})
 						);
@@ -55,20 +71,6 @@ function Stacknavigation() {
 				})
 			);
 		});
-		db.collection("chatSupport")
-			.orderBy("createdAt", "asc")
-			.onSnapshot((snapshot) => {
-				dispatch(
-					setChat({
-						mesg: snapshot.docs.map((doc) => ({
-							id: doc.id,
-							senderid: doc.data().senderid,
-							mesg: doc.data().mesg,
-							sendTo: doc.data().sendTo,
-						})),
-					})
-				);
-			});
 	}, []);
 
 	return (

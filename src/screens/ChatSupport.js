@@ -19,24 +19,20 @@ const ChatSupport = () => {
 	const [message, setMessage] = useState("");
 	const { isAuth } = useSelector((state) => state.auth);
 	const { mesg } = useSelector((state) => state.project);
-	const filtered =
-		mesg.length > 0 &&
-		mesg.filter(
-			(dat) => dat.senderid === isAuth.userid || dat.sendTo === isAuth.userid
-		);
-	console.log("filtered", filtered);
 
 	const sendmesg = async () => {
 		await db
 			.collection("chatSupport")
-			.add({
-				senderid: isAuth.userid,
-				mesg: message,
-				sendTo: "admin",
+			.doc(isAuth.userid)
+			.update({
+				messages:
+					mesg.messages.length > 0
+						? [...mesg.messages, { mesg: message, sender: isAuth.userid }]
+						: [{ mesg: message, sender: isAuth.userid }],
 				createdAt: new Date(),
 			})
-			.then((doc) => {
-				console.log("checking", doc.id);
+			.then(() => {
+				console.log("checking");
 				setMessage("");
 			});
 	};
@@ -57,14 +53,14 @@ const ChatSupport = () => {
 							alignSelf: "center",
 						}}>
 						<FlatList
-							data={filtered}
-							keyExtractor={(item) => item.id}
+							data={mesg?.messages}
+							keyExtractor={(item, index) => `${index}`}
 							ref={flatlistRef}
 							onContentSizeChange={() => flatlistRef.current.scrollToEnd()}
 							renderItem={({ item }) => (
 								<MyMsg
 									msg={item.mesg}
-									isSender={item.senderid === isAuth.userid ? true : false}
+									isSender={item.sender === isAuth.userid ? true : false}
 								/>
 							)}
 						/>

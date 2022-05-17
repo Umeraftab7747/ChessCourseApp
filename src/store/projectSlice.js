@@ -4,7 +4,7 @@ const initialState = {
 	msgs: [],
 	books: [],
 	cart: [],
-	mesg: [],
+	mesg: {},
 };
 
 export const projectSlice = createSlice({

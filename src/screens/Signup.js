@@ -9,7 +9,8 @@ import Appinput from "../components/Appinput";
 import Appbutton from "../components/Appbutton";
 import Header from "../components/Header";
 import { auth, db } from "../Database/firebaseConfig";
-
+import { useDispatch } from "react-redux";
+import { setChat } from "../store/projectSlice";
 const Signup = ({ navigation }) => {
 	const [Name, setName] = React.useState("");
 	const [NameFoucs, setNameFoucs] = React.useState(false);
@@ -18,6 +19,7 @@ const Signup = ({ navigation }) => {
 	const [Passowrd, setPassowrd] = React.useState("");
 	const [PassowrdFoucs, setPassowrdFoucs] = React.useState(false);
 	const [isSelected, setSelection] = React.useState(false);
+	const dispatch = useDispatch();
 	const createAccount = async () => {
 		const email = Email;
 		const passowrd = Passowrd;
@@ -31,6 +33,31 @@ const Signup = ({ navigation }) => {
 				.then(() => {
 					console.log("checking");
 					navigation.replace("MyTabs");
+				});
+			db.collection("chatSupport")
+				.doc(uid)
+				.set({
+					customer: uid,
+					email: email,
+					admin: "admin",
+					createdAt: new Date(),
+					messages: [],
+				})
+				.then(() => {
+					db.collection("chatSupport")
+						.doc(uid)
+						.onSnapshot((doc) => {
+							dispatch(
+								setChat({
+									mesg: {
+										customer: doc.data().customer,
+										email: doc.data().email,
+										admin: doc.data().admin,
+										messages: doc.data().messages,
+									},
+								})
+							);
+						});
 				});
 		});
 	};
