@@ -6,7 +6,12 @@ import {
 	TouchableOpacity,
 	TextInput,
 	FlatList,
+	Alert,
 } from "react-native";
+import {
+	useStripe,
+	confirmPaymentSheetPayment,
+} from "@stripe/stripe-react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { KeyboardAvoidingScrollView } from "react-native-keyboard-avoiding-scroll-view";
 import { w, h } from "react-native-responsiveness";
@@ -20,6 +25,57 @@ import { useSelector } from "react-redux";
 const Cart = () => {
 	const { cart, books } = useSelector((state) => state.project);
 	const [totalPrice, settotalPrice] = useState(0);
+	const stripe = useStripe();
+
+	const buy = async () => {
+		try {
+			const response = await fetch(
+				`https://strip-checking.herokuapp.com/create-payment-intent`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						amount: "12",
+					}),
+				}
+			);
+
+			const data = await response.json();
+			if (!response.ok) {
+				return Alert.alert(data.message);
+			}
+			const initSheet = await stripe.initPaymentSheet({
+				paymentIntentClientSecret: data.clientSecret,
+				merchantDisplayName: "Bitcoin Buy",
+			});
+			if (initSheet.error) {
+				// console.error(initSheet.error);
+				return Alert.alert(initSheet.error.message);
+			}
+			const presentSheet = await stripe.presentPaymentSheet({
+				clientSecret: data.clientSecret,
+			});
+			if (presentSheet.error) {
+				// console.error(presentSheet.error);
+				return Alert.alert(presentSheet.error.message);
+			}
+			const resp = await stripe.confirmPaymentSheetPayment();
+			console.log(resp);
+			if (resp.error) {
+				alert("error", resp.error);
+			} else {
+				alert("done");
+			}
+			Alert.alert("Payment successfully! Thank you for the purchase.");
+			// Update Bitcoin balance & total value
+			// Reset quantity
+		} catch (err) {
+			// console.error(err);
+			Alert.alert("Payment failed!", err.message);
+		}
+	};
 	useEffect(() => {
 		// setInterval(() => {
 		if (books.length > 0 && cart.length > 0) {
@@ -88,7 +144,7 @@ const Cart = () => {
 			<Text style={styles.paymentEtc}>
 				The total amount is for one payment. No subscription!
 			</Text>
-			<Appbutton name={"Checkout"} />
+			<Appbutton name={"Checkout"} onPress={buy} />
 		</View>
 	);
 };
