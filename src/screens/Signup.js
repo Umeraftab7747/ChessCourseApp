@@ -50,10 +50,10 @@ const Signup = ({ navigation }) => {
 							dispatch(
 								setChat({
 									mesg: {
-										customer: doc.data().customer,
-										email: doc.data().email,
-										admin: doc.data().admin,
-										messages: doc.data().messages,
+										customer: doc?.data()?.customer,
+										email: doc?.data()?.email,
+										admin: doc?.data()?.admin,
+										messages: doc?.data()?.messages,
 									},
 								})
 							);

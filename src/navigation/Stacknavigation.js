@@ -16,6 +16,7 @@ import { auth, db } from "../Database/firebaseConfig";
 import { setBooks, setChat } from "../store/projectSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../store/authSlice";
+import PaymentMethod from "../screens/PaymentMethod";
 const Stack = createNativeStackNavigator();
 
 function Stacknavigation() {
@@ -34,8 +35,8 @@ function Stacknavigation() {
 							setAuth({
 								auth: {
 									userid: uid,
-									email: doc.data().email,
-									name: doc.data().name,
+									email: doc?.data().email,
+									name: doc?.data().name,
 								},
 							})
 						);
@@ -46,10 +47,10 @@ function Stacknavigation() {
 						dispatch(
 							setChat({
 								mesg: {
-									customer: doc.data().customer,
-									email: doc.data().email,
-									admin: doc.data().admin,
-									messages: doc.data().messages,
+									customer: doc?.data().customer,
+									email: doc?.data().email,
+									admin: doc?.data().admin,
+									messages: doc?.data().messages,
 								},
 							})
 						);
@@ -86,6 +87,7 @@ function Stacknavigation() {
 					initialParams={{ itemid: "" }}
 				/>
 				<Stack.Screen name='MyTabs' component={MyTabs} />
+				<Stack.Screen name='PaymentMethod' component={PaymentMethod} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

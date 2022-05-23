@@ -55,8 +55,12 @@ const Profile = ({ navigation }) => {
 					</View>
 				</View>
 				<View style={styles.MainText}>
-					<Text style={styles.nameText}>{isAuth.name}</Text>
-					<Text style={styles.MailText}>{isAuth.email}</Text>
+					<Text style={styles.nameText}>
+						{isAuth.name ? isAuth.name : "username"}
+					</Text>
+					<Text style={styles.MailText}>
+						{isAuth.email ? isAuth.email : "email"}
+					</Text>
 				</View>
 			</View>
 			{/* Images */}

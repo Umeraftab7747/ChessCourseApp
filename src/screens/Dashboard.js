@@ -57,31 +57,42 @@ const Dashboard = ({ navigation }) => {
 			{/* Top Header */}
 
 			{/* Searchbar */}
-			<View style={styles.TextInputContainer}>
-				<TextInput
-					style={styles.TextInputMainDesgin}
-					placeholder={"Search"}
-					onChangeText={(text) => setsearchtxt(text)}
+			{booksdata.length > 0 ? (
+				<FlatList
+					data={booksdata}
+					ListHeaderComponent={
+						<>
+							<View style={styles.TextInputContainer}>
+								<TextInput
+									style={styles.TextInputMainDesgin}
+									placeholder={"Search"}
+									onChangeText={(text) => setsearchtxt(text)}
+								/>
+							</View>
+							{/* Searchbar */}
+							<Text style={styles.ContinueText}>
+								Continue to watch previous class
+							</Text>
+						</>
+					}
+					renderItem={({ item }) => (
+						<AppCard
+							name={item.name}
+							price={"€" + item.price}
+							imglink={item.imglink}
+							onPress={() => {
+								navigation.navigate("ProductDetail", { itemid: item.id });
+							}}
+						/>
+					)}
+					numColumns={2}
+					keyExtractor={(item) => item.id}
 				/>
-			</View>
-			{/* Searchbar */}
-			<Text style={styles.ContinueText}>Continue to watch previous class</Text>
-
-			<FlatList
-				data={booksdata}
-				renderItem={({ item }) => (
-					<AppCard
-						name={item.name}
-						price={"€" + item.price}
-						imglink={item.imglink}
-						onPress={() => {
-							navigation.navigate("ProductDetail", { itemid: item.id });
-						}}
-					/>
-				)}
-				numColumns={2}
-				keyExtractor={(item) => item.id}
-			/>
+			) : (
+				<View style={styles.nodatadiv}>
+					<Text style={styles.textdata}>No data available.</Text>
+				</View>
+			)}
 		</View>
 	);
 };
@@ -158,6 +169,25 @@ const styles = StyleSheet.create({
 		height: "100%",
 		resizeMode: "cover",
 	},
+	nodatadiv: {
+		width: "100%",
+		flex: 1,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		flexDirection: "column",
+	},
+	textdata: {
+		fontSize: h("2.5%"),
+		color: "lightgrey",
+	},
 });
 
 export default Dashboard;
+
+// Sandbox account
+// sb-eyes4715244391@business.example.com
+// Client ID
+// AfQmo9FkVUa4djG-TrtesgtitsFl8jyAAVkQtXWJppDgOSW7Qo3iFMf8Rda6pqipBv3vNHam5ZABO_Kn
+// Secret
+// EDhBpTNIEJxWBdZWpOKfpkJQZcLUbXa5YavEQMW1rNjpLPBSfGYuhZWGHvmvD6nCac25Z-F6vJ3qMZY2
