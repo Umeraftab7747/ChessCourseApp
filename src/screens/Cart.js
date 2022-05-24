@@ -46,6 +46,7 @@ const Cart = ({ navigation }) => {
 						name: isAuth.name,
 						userid: isAuth.userid,
 					},
+					createdAt: new Date(),
 				})
 				.then(() => {
 					alert("Payment Completed Succefully.");
