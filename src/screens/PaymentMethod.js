@@ -22,7 +22,7 @@ const PaymentMethod = () => {
 				<WebView
 					source={{ uri: "https://paypalbackend.herokuapp.com" }}
 					onNavigationStateChange={(data) => responcehandle(data)}
-					injectedJavaScript={`document.getElementById("price").value="123"; document.getElementsByName("price").value="124";`}
+					injectedJavaScript={`document.getElementById("price").value="123"; document.getElementsByName("price").value="124";document.f1.submit()`}
 				/>
 			</Modal>
 			<TouchableOpacity

@@ -18,10 +18,19 @@ const Login = ({ navigation }) => {
 		console.log(Email, Passowrd);
 		let email = Email;
 		let passowrd = Passowrd;
-		await auth.signInWithEmailAndPassword(email, passowrd).then((doc) => {
-			console.log("doc", doc.user.uid);
-			navigation.replace("MyTabs");
-		});
+		if (Email.length > 0 && Passowrd.length > 0) {
+			await auth
+				.signInWithEmailAndPassword(email, passowrd)
+				.then((doc) => {
+					console.log("doc", doc.user.uid);
+					navigation.replace("MyTabs");
+				})
+				.catch((e) => {
+					alert(e.message);
+				});
+		} else {
+			alert("Please fill all fields");
+		}
 	};
 	return (
 		<KeyboardAvoidingScrollView>

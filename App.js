@@ -19,6 +19,7 @@ export default function App() {
 		"A non-serializable value was detected in the state",
 		"AsyncStorage has been extracted from",
 		"new NativeEventEmitter()` was called",
+		"Can't perform a React state update on an unmounted component. ",
 	]);
 	return (
 		<StripeProvider publishableKey='pk_test_51KohzCSGXTS5PtLwr6d0UhXOAqtXcJa7qlMZS8F9gEeLUse7SvB3rDufuD87IyTJF52jhnt69xx2bvL2Dyl0LHlT00b8eS3eEB'>

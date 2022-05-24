@@ -20,11 +20,10 @@ import { setAuth } from "../store/authSlice";
 
 const Profile = ({ navigation }) => {
 	const { isAuth } = useSelector((state) => state.auth);
-	console.log(isAuth);
-	const logoutFunct = () => {
-		const dispatch = useDispatch();
-		auth.signOut();
-		dispatch(setAuth({ auth: null }));
+	const dispatch = useDispatch();
+	const logoutFunct = async () => {
+		await auth.signOut();
+		// dispatch(setAuth({ auth: null }));
 		navigation.replace("Login");
 	};
 	return (
@@ -56,10 +55,10 @@ const Profile = ({ navigation }) => {
 				</View>
 				<View style={styles.MainText}>
 					<Text style={styles.nameText}>
-						{isAuth.name ? isAuth.name : "username"}
+						{isAuth?.name !== "" ? isAuth?.name : "username"}
 					</Text>
 					<Text style={styles.MailText}>
-						{isAuth.email ? isAuth.email : "email"}
+						{isAuth?.email !== "" ? isAuth?.email : "email"}
 					</Text>
 				</View>
 			</View>
@@ -69,11 +68,13 @@ const Profile = ({ navigation }) => {
 			<View style={styles.Fields}>
 				<Text style={styles.nameFields}>Name</Text>
 				<Text style={{ ...styles.nameFields2, textTransform: "capitalize" }}>
-					{isAuth.name}
+					{isAuth?.name !== "" ? isAuth?.name : "username"}
 				</Text>
 
 				<Text style={styles.nameFields}>Email</Text>
-				<Text style={styles.nameFields2}>{isAuth.email}</Text>
+				<Text style={styles.nameFields2}>
+					{isAuth?.email !== "" ? isAuth?.email : "email"}
+				</Text>
 				<Appbutton name={"Logout"} onPress={logoutFunct} />
 			</View>
 		</View>

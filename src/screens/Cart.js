@@ -6,72 +6,65 @@ import {
 	TouchableOpacity,
 	TextInput,
 	FlatList,
+	Modal,
 	Alert,
 } from "react-native";
 import {
 	useStripe,
 	confirmPaymentSheetPayment,
 } from "@stripe/stripe-react-native";
+import { WebView } from "react-native-webview";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { KeyboardAvoidingScrollView } from "react-native-keyboard-avoiding-scroll-view";
 import { w, h } from "react-native-responsiveness";
 import { black, Yellow } from "../utils/color";
-
+import { db } from "../Database/firebaseConfig";
 // components
 import AppCartItem from "../components/AppCartItem";
 import Appbutton from "../components/Appbutton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../store/projectSlice";
 
 const Cart = ({ navigation }) => {
+	const dispatch = useDispatch();
 	const { cart, books } = useSelector((state) => state.project);
+	const { isAuth } = useSelector((state) => state.auth);
 	const [totalPrice, settotalPrice] = useState(0);
-	const stripe = useStripe();
-	const buy = () => {
-		navigation.navigate("PaymentMethod");
+	const [modalshow, setmodalshow] = useState(false);
+	const toggleModal = () => {
+		setmodalshow(!modalshow);
 	};
-	// const buy = async () => {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`https://strip-checking.herokuapp.com/create-payment-intent`,
-	// 			{
-	// 				method: "POST",
-	// 				headers: {
-	// 					"Content-Type": "application/json",
-	// 				},
-	// 				body: JSON.stringify({
-	// 					amount: "12",
-	// 				}),
-	// 			}
-	// 		);
 
-	// 		const data = await response.json();
-	// 		if (!response.ok) {
-	// 			return alert(data.message);
-	// 		}
-	// 		const initSheet = await stripe.initPaymentSheet({
-	// 			paymentIntentClientSecret: data.clientSecret,
-	// 			merchantDisplayName: "Bitcoin Buy",
-	// 		});
-	// 		if (initSheet.error) {
-	// 			// console.error(initSheet.error);
-	// 			return alert(initSheet.error.message);
-	// 		}
-	// 		const presentSheet = await stripe.presentPaymentSheet({
-	// 			clientSecret: data.clientSecret,
-	// 		});
-	// 		if (presentSheet.error) {
-	// 			// console.error(presentSheet.error);
-	// 			return alert(presentSheet.error.message);
-	// 		}
+	const responcehandle = async (data) => {
+		if (data.title === "success") {
+			await db
+				.collection("confirmOrder")
+				.add({
+					books: cart,
+					userinfo: {
+						email: isAuth.email,
+						name: isAuth.name,
+						userid: isAuth.userid,
+					},
+				})
+				.then(() => {
+					alert("Payment Completed Succefully.");
+					dispatch(setCart({ cart: [] }));
+					toggleModal();
+				});
+		} else if (data.title === "cancel") {
+			toggleModal();
+			alert("Payment Error.");
+		}
+	};
+	const buy = () => {
+		if (cart.length > 0) {
+			toggleModal();
+		} else {
+			alert("Please Add atleast 1 item in cart.");
+		}
+	};
 
-	// 		alert("Payment successfully! Thank you for the purchase.");
-	// 		// Update Bitcoin balance & total value
-	// 		// Reset quantity
-	// 	} catch (err) {
-	// 		// console.error(err);
-	// 		alert("Payment failed!", err.message);
-	// 	}
-	// };
 	useEffect(() => {
 		// setInterval(() => {
 		if (books.length > 0 && cart.length > 0) {
@@ -80,10 +73,11 @@ const Cart = ({ navigation }) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
 					newtotal = newtotal + datas.price;
-					console.log(index);
 				}
 				settotalPrice(newtotal);
 			});
+		} else {
+			settotalPrice(0);
 		}
 		// }, 5000);
 	}, [cart]);
@@ -141,6 +135,13 @@ const Cart = ({ navigation }) => {
 				The total amount is for one payment. No subscription!
 			</Text>
 			<Appbutton name={"Checkout"} onPress={buy} />
+			<Modal visible={modalshow} onRequestClose={toggleModal}>
+				<WebView
+					source={{ uri: "https://paypalbackend.herokuapp.com" }}
+					onNavigationStateChange={(data) => responcehandle(data)}
+					injectedJavaScript={`document.getElementById("price").value=${totalPrice}; document.getElementsByName("price").value=${totalPrice};document.f1.submit()`}
+				/>
+			</Modal>
 		</View>
 	);
 };

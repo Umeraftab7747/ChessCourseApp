@@ -56,7 +56,7 @@ function Stacknavigation() {
 						);
 					});
 			} else {
-				dispatch(setAuth({ auth: null }));
+				dispatch(setAuth({ auth: { email: "", name: "", userid: "" } }));
 			}
 		});
 		db.collection("books").onSnapshot((snapshot) => {

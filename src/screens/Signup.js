@@ -23,43 +23,48 @@ const Signup = ({ navigation }) => {
 	const createAccount = async () => {
 		const email = Email;
 		const passowrd = Passowrd;
-
-		await auth.createUserWithEmailAndPassword(email, passowrd);
-		await auth.onAuthStateChanged((user) => {
-			const uid = user.uid;
-			db.collection("userinfo")
-				.doc(uid)
-				.set({ email, name: Name })
-				.then(() => {
-					console.log("checking");
-					navigation.replace("MyTabs");
-				});
-			db.collection("chatSupport")
-				.doc(uid)
-				.set({
-					customer: uid,
-					email: email,
-					admin: "admin",
-					createdAt: new Date(),
-					messages: [],
-				})
-				.then(() => {
-					db.collection("chatSupport")
-						.doc(uid)
-						.onSnapshot((doc) => {
-							dispatch(
-								setChat({
-									mesg: {
-										customer: doc?.data()?.customer,
-										email: doc?.data()?.email,
-										admin: doc?.data()?.admin,
-										messages: doc?.data()?.messages,
-									},
-								})
-							);
-						});
-				});
-		});
+		if (Email.length > 0 && Passowrd.length > 0 && Name.length > 0) {
+			await auth.createUserWithEmailAndPassword(email, passowrd).catch((e) => {
+				alert(e.message);
+			});
+			await auth.onAuthStateChanged((user) => {
+				const uid = user.uid;
+				db.collection("userinfo")
+					.doc(uid)
+					.set({ email, name: Name })
+					.then(() => {
+						console.log("checking");
+						navigation.replace("MyTabs");
+					});
+				db.collection("chatSupport")
+					.doc(uid)
+					.set({
+						customer: uid,
+						email: email,
+						admin: "admin",
+						createdAt: new Date(),
+						messages: [],
+					})
+					.then(() => {
+						db.collection("chatSupport")
+							.doc(uid)
+							.onSnapshot((doc) => {
+								dispatch(
+									setChat({
+										mesg: {
+											customer: doc?.data()?.customer,
+											email: doc?.data()?.email,
+											admin: doc?.data()?.admin,
+											messages: doc?.data()?.messages,
+										},
+									})
+								);
+							});
+					});
+			});
+		} else {
+			alert("All fields are required");
+		}
 	};
 	return (
 		<KeyboardAvoidingScrollView>

@@ -24,10 +24,10 @@ const ProductDetail = ({ navigation, route }) => {
 	console.log(itemid);
 	const { books, cart } = useSelector((state) => state.project);
 	const curentitem = books && books.find((item) => item.id === itemid);
-	const addCartFun = () => {
-		dispatch(
+	const addCartFun = async () => {
+		await dispatch(
 			setCart({
-				cart: cart.length > 0 ? [...cart, { id: itemid }] : [{ id: itemid }],
+				cart: [...cart, { id: itemid }],
 			})
 		);
 		alert("Successfyully added to cart");
