@@ -1,11 +1,14 @@
 import firebase from "firebase";
 const firebaseConfig = {
-	apiKey: "AIzaSyDXuGDyH1VaMRNgECM2SRT33ct2fnKJZao",
-	authDomain: "plotsbuytest.firebaseapp.com",
-	projectId: "plotsbuytest",
-	storageBucket: "plotsbuytest.appspot.com",
-	messagingSenderId: "63500022639",
-	appId: "1:63500022639:web:956fe2bcab56fb3487ee9a",
+	apiKey: "AIzaSyDCzvEhMO2aL4kWA4VSiij3ZN0r9lpiIiI",
+	authDomain: "schachkurse-43b17.firebaseapp.com",
+	databaseURL:
+		"https://schachkurse-43b17-default-rtdb.europe-west1.firebasedatabase.app",
+	projectId: "schachkurse-43b17",
+	storageBucket: "schachkurse-43b17.appspot.com",
+	messagingSenderId: "296173156103",
+	appId: "1:296173156103:web:084e1213906089928937a2",
+	measurementId: "G-4EW7WH4JZ7",
 };
 
 firebase.initializeApp(firebaseConfig);
