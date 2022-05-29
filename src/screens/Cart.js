@@ -49,20 +49,23 @@ const Cart = ({ navigation }) => {
 					createdAt: new Date(),
 				})
 				.then(() => {
-					alert("Payment Completed Succefully.");
+					//payment successfully
+					alert("Zahlung erfolgreich abgeschlossen.");
 					dispatch(setCart({ cart: [] }));
 					toggleModal();
 				});
 		} else if (data.title === "cancel") {
 			toggleModal();
-			alert("Payment Error.");
+			//payment error
+			alert("Zahlungsfehler.");
 		}
 	};
 	const buy = () => {
 		if (cart.length > 0) {
 			toggleModal();
 		} else {
-			alert("Please Add atleast 1 item in cart.");
+			//atleast one item
+			alert("Bitte legen Sie mindestens 1 Artikel in den Warenkorb.");
 		}
 	};
 
@@ -107,7 +110,7 @@ const Cart = ({ navigation }) => {
 					/>
 				</View>
 				<View style={styles.Rightcontainer}>
-					<Text style={styles.cartText}>Cart</Text>
+					<Text style={styles.cartText}>Warenkorb</Text>
 				</View>
 			</View>
 			{/* header */}
@@ -129,13 +132,13 @@ const Cart = ({ navigation }) => {
 			{/* line */}
 			<View style={styles.line} />
 			<View style={styles.NetTotal}>
-				<Text style={styles.TotalCart}>Total</Text>
+				<Text style={styles.TotalCart}>Gesamtpreis</Text>
 				<Text style={styles.TotalCart2}>€{totalPrice}</Text>
 			</View>
 			<Text style={styles.paymentEtc}>
-				The total amount is for one payment. No subscription!
+				Das ist eine Einmalzahlung, kein Abo.
 			</Text>
-			<Appbutton name={"Checkout"} onPress={buy} />
+			<Appbutton name={"Kaufen"} onPress={buy} />
 			<Modal visible={modalshow} onRequestClose={toggleModal}>
 				<WebView
 					source={{ uri: "https://paypalbackend.herokuapp.com" }}

@@ -30,7 +30,7 @@ const ProductDetail = ({ navigation, route }) => {
 				cart: [...cart, { id: itemid }],
 			})
 		);
-		alert("Successfyully added to cart");
+		alert("Erfolgreich in den Warenkorb gelegt");
 	};
 	return (
 		<View style={styles.MainContainer}>
@@ -48,7 +48,7 @@ const ProductDetail = ({ navigation, route }) => {
 				<Text style={styles.MainText}>{curentitem.name}</Text>
 				<Text style={styles.MainText}>€ {curentitem.price}</Text>
 				<Text style={styles.MainText2}>{curentitem.description}</Text>
-				<Appbutton name={"Add To Cart"} onPress={addCartFun} />
+				<Appbutton name={"In den Warenkorb legen"} onPress={addCartFun} />
 			</ScrollView>
 		</View>
 	);

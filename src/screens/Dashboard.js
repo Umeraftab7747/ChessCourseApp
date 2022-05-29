@@ -22,6 +22,8 @@ const Dashboard = ({ navigation }) => {
 	const { books } = useSelector((state) => state.project);
 	const [booksdata, setbooksdata] = useState(books);
 	const [searchtxt, setsearchtxt] = useState("");
+	const { isAuth } = useSelector((state) => state.auth);
+
 	useEffect(() => {
 		if (searchtxt) {
 			const newdata = books.filter((dat) =>
@@ -38,9 +40,11 @@ const Dashboard = ({ navigation }) => {
 			{/* Top Header */}
 			<View style={styles.HeaderContainer}>
 				<View style={styles.LeftContainer}>
-					<Text style={styles.NameContainer}>Hola, sayef!</Text>
+					<Text style={styles.NameContainer}>
+						Hola, {isAuth?.name !== "" ? isAuth?.name : "username"}!
+					</Text>
 					<Text style={styles.NameContainer2}>
-						What do you wanna learn today?
+						In welchen Schachkurs möchtest Du heute trainieren?
 					</Text>
 				</View>
 				<View style={styles.RightContainer}>
@@ -71,7 +75,7 @@ const Dashboard = ({ navigation }) => {
 							</View>
 							{/* Searchbar */}
 							<Text style={styles.ContinueText}>
-								Continue to watch previous class
+								Weiter im erworbenen Schachkurs
 							</Text>
 						</>
 					}
@@ -90,7 +94,7 @@ const Dashboard = ({ navigation }) => {
 				/>
 			) : (
 				<View style={styles.nodatadiv}>
-					<Text style={styles.textdata}>No data available.</Text>
+					<Text style={styles.textdata}>keine Daten verfügbar.</Text>
 				</View>
 			)}
 		</View>
@@ -184,10 +188,3 @@ const styles = StyleSheet.create({
 });
 
 export default Dashboard;
-
-// Sandbox account
-// sb-eyes4715244391@business.example.com
-// Client ID
-// AfQmo9FkVUa4djG-TrtesgtitsFl8jyAAVkQtXWJppDgOSW7Qo3iFMf8Rda6pqipBv3vNHam5ZABO_Kn
-// Secret
-// EDhBpTNIEJxWBdZWpOKfpkJQZcLUbXa5YavEQMW1rNjpLPBSfGYuhZWGHvmvD6nCac25Z-F6vJ3qMZY2

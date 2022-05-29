@@ -16,19 +16,24 @@ const Forget = ({ navigation }) => {
 		if (Email.length > 0) {
 			console.log(Email);
 			await auth.sendPasswordResetEmail(Email).then(() => {
-				alert("Rest Password Link is sent by email");
+				//Reset Password Link is sent by email
+				alert(
+					"Der Link zum Zurücksetzen des Passworts wird per E-Mail gesendet"
+				);
 			});
 		} else {
-			alert("Please enter email");
+			//Plaese enter email
+			alert("Bitte E-Mail eingeben.");
 		}
 	};
 	return (
 		<View style={styles.Maincontainer}>
+			{/* back */}
 			<Header
 				onPress={() => {
 					navigation.goBack();
 				}}
-				text={"Back"}
+				text={"Zurück"}
 			/>
 			<View style={styles.Mainbox}>
 				<Image
@@ -36,11 +41,12 @@ const Forget = ({ navigation }) => {
 					source={require("../../assets/main/sad.png")}
 				/>
 			</View>
-			<Text style={styles.weclomtxt}>Reset Password</Text>
+			{/* Reset Password */}
+			<Text style={styles.weclomtxt}>Passwort zurücksetzen</Text>
+			{/* Enter your email to get a new password */}
 			<Text style={styles.weclomtxt2}>
-				Enter your email to get a new password
+				Trage hier Deine Email ein, um ein neues Passwort zu ehalten
 			</Text>
-
 			<View style={styles.InputContainer}>
 				<Appinput
 					name={"Email"}
@@ -52,13 +58,13 @@ const Forget = ({ navigation }) => {
 						setEmailFoucs(false);
 					}}
 					Foucs={EmailFoucs}
-					placeholder={"Enter Email"}
+					placeholder={"Bitte E-Mail eingeben"}
 					onChangeText={(text) => {
 						setEmail(text);
 					}}
 				/>
 
-				<Appbutton onPress={resetfunct} name={"Reset"} />
+				<Appbutton onPress={resetfunct} name={"Abschicken"} />
 			</View>
 		</View>
 	);

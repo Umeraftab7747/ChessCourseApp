@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
 					alert(e.message);
 				});
 		} else {
-			alert("Please fill all fields");
+			alert("Fülle bitte alle Felder aus");
 		}
 	};
 	return (
@@ -41,8 +41,8 @@ const Login = ({ navigation }) => {
 						source={require("../../assets/main/bg2.png")}
 					/>
 				</View>
-				<Text style={styles.weclomtxt}>Welcome!</Text>
-				<Text style={styles.weclomtxt2}>Sign in and get started</Text>
+				<Text style={styles.weclomtxt}>Willkommen!</Text>
+				<Text style={styles.weclomtxt2}>Anmelden und Loslegen</Text>
 				<View style={styles.InputContainer}>
 					<Appinput
 						name={"Email"}
@@ -54,13 +54,13 @@ const Login = ({ navigation }) => {
 							setEmailFoucs(false);
 						}}
 						Foucs={EmailFoucs}
-						placeholder={"Enter Email"}
+						placeholder={"Email eingeben"}
 						onChangeText={(text) => {
 							setEmail(text);
 						}}
 					/>
 					<Appinput
-						name={"Password"}
+						name={"Passwort"}
 						value={Passowrd}
 						onFocus={() => {
 							setPassowrdFoucs(true);
@@ -69,28 +69,28 @@ const Login = ({ navigation }) => {
 							setPassowrdFoucs(false);
 						}}
 						Foucs={PassowrdFoucs}
-						placeholder={"Enter Password"}
+						placeholder={"Passwort eingeben"}
 						secureTextEntry
 						onChangeText={(text) => {
 							setPassowrd(text);
 						}}
 					/>
-					<Appbutton onPress={loginfunct} name={"Sign In"} />
+					<Appbutton onPress={loginfunct} name={"Anmelden"} />
 
 					<TouchableOpacity
 						onPress={() => {
 							navigation.navigate("Forget");
 						}}>
-						<Text style={styles.ForgetPassword}>Forgot Password</Text>
+						<Text style={styles.ForgetPassword}>Passwort vergessen</Text>
 					</TouchableOpacity>
 
 					<View style={styles.Line} />
-					<Text style={styles.ForgetPassword3}>Don’t have an account?</Text>
+					<Text style={styles.ForgetPassword3}>Noch keinen Account?</Text>
 					<TouchableOpacity
 						onPress={() => {
 							navigation.navigate("Signup");
 						}}>
-						<Text style={styles.ForgetPassword2}>Sign Up</Text>
+						<Text style={styles.ForgetPassword2}>Hier Registrieren</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

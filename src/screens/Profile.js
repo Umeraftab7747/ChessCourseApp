@@ -37,7 +37,7 @@ const Profile = ({ navigation }) => {
 					/>
 				</View>
 				<View style={styles.Rightcontainer}>
-					<Text style={styles.cartText}>Profile</Text>
+					<Text style={styles.cartText}>Profil</Text>
 				</View>
 			</View>
 			{/* header */}
@@ -75,7 +75,7 @@ const Profile = ({ navigation }) => {
 				<Text style={styles.nameFields2}>
 					{isAuth?.email !== "" ? isAuth?.email : "email"}
 				</Text>
-				<Appbutton name={"Logout"} onPress={logoutFunct} />
+				<Appbutton name={"Ausloggen"} onPress={logoutFunct} />
 			</View>
 		</View>
 	);

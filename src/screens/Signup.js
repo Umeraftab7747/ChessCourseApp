@@ -63,7 +63,7 @@ const Signup = ({ navigation }) => {
 					});
 			});
 		} else {
-			alert("All fields are required");
+			alert("alle Felder sind erforderlich.");
 		}
 	};
 	return (
@@ -75,8 +75,8 @@ const Signup = ({ navigation }) => {
 						source={require("../../assets/main/bg2.png")}
 					/>
 				</View>
-				<Text style={styles.weclomtxt}>New Account</Text>
-				<Text style={styles.weclomtxt2}>Sign up and get started</Text>
+				<Text style={styles.weclomtxt}>Konto erstellen</Text>
+				<Text style={styles.weclomtxt2}>Anmelden und Loslegen</Text>
 				<View style={styles.InputContainer}>
 					<Appinput
 						name={"Name"}
@@ -88,13 +88,13 @@ const Signup = ({ navigation }) => {
 							setNameFoucs(false);
 						}}
 						Foucs={NameFoucs}
-						placeholder={"Enter Name"}
+						placeholder={"Name eingeben"}
 						onChangeText={(text) => {
 							setName(text);
 						}}
 					/>
 					<Appinput
-						name={"Email"}
+						name={"E-Mail"}
 						value={Email}
 						onFocus={() => {
 							setEmailFoucs(true);
@@ -103,13 +103,13 @@ const Signup = ({ navigation }) => {
 							setEmailFoucs(false);
 						}}
 						Foucs={EmailFoucs}
-						placeholder={"Enter Email"}
+						placeholder={"E-Mail eingeben"}
 						onChangeText={(text) => {
 							setEmail(text);
 						}}
 					/>
 					<Appinput
-						name={"Password"}
+						name={"Passwort"}
 						value={Passowrd}
 						onFocus={() => {
 							setPassowrdFoucs(true);
@@ -118,21 +118,21 @@ const Signup = ({ navigation }) => {
 							setPassowrdFoucs(false);
 						}}
 						Foucs={PassowrdFoucs}
-						placeholder={"Enter Password"}
+						placeholder={"Passwort eingeben"}
 						secureTextEntry
 						onChangeText={(text) => {
 							setPassowrd(text);
 						}}
 					/>
-					<Appbutton onPress={createAccount} name={"Sign Up"} />
+					<Appbutton onPress={createAccount} name={"Hier Registrieren"} />
 
 					<View style={styles.Line} />
-					<Text style={styles.ForgetPassword3}>Already have an account?</Text>
+					<Text style={styles.ForgetPassword3}>Hast Du bereits ein Konto?</Text>
 					<TouchableOpacity
 						onPress={() => {
 							navigation.goBack();
 						}}>
-						<Text style={styles.ForgetPassword2}>Sign In</Text>
+						<Text style={styles.ForgetPassword2}>Einloggen</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
