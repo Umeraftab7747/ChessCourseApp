@@ -61,7 +61,7 @@ export function MyTabs() {
 				name='Dashboard'
 				component={Dashboard}
 				options={{
-					tabBarLabel: "Home",
+					tabBarLabel: "Übersicht",
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name='home' color={color} size={26} />
 					),
@@ -72,7 +72,7 @@ export function MyTabs() {
 				name='ChatSupport'
 				component={ChatSupport}
 				options={{
-					tabBarLabel: "Chat Support",
+					tabBarLabel: "Chat-Unterstützung",
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name='chat' color={color} size={26} />
 					),
@@ -82,7 +82,7 @@ export function MyTabs() {
 				name='Cart'
 				component={Cart}
 				options={{
-					tabBarLabel: "Cart",
+					tabBarLabel: "Warenkorb",
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name='cart' color={color} size={26} />
 					),
@@ -92,7 +92,7 @@ export function MyTabs() {
 				name='Profile'
 				component={Profile}
 				options={{
-					tabBarLabel: "Profile",
+					tabBarLabel: "Profil",
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name='account' color={color} size={26} />
 					),
