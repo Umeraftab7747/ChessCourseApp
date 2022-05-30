@@ -34,7 +34,7 @@ const Signup = ({ navigation }) => {
 					.set({ email, name: Name })
 					.then(() => {
 						console.log("checking");
-						navigation.replace("MyTabs");
+						// navigation.replace("MyTabs");
 					});
 				db.collection("chatSupport")
 					.doc(uid)

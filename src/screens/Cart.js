@@ -76,9 +76,10 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = newtotal + datas.price;
+					newtotal = parseInt(newtotal) + parseInt(datas.price);
+					console.log(newtotal);
+					settotalPrice(newtotal);
 				}
-				settotalPrice(newtotal);
 			});
 		} else {
 			settotalPrice(0);
@@ -92,13 +93,19 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = newtotal + datas.price;
-					console.log(index);
+					newtotal = parseInt(newtotal) + parseInt(datas.price);
+					console.log(newtotal);
+					settotalPrice(newtotal);
 				}
-				settotalPrice(newtotal);
+				// settotalPrice(newtotal);
 			});
 		}
 	}, []);
+	const removeitmfun = (mindex) => {
+		const newcart = cart.filter((dat, index) => mindex !== index);
+		console.log(newcart);
+		dispatch(setCart({ cart: newcart }));
+	};
 	return (
 		<View style={styles.MainCart}>
 			{/* header */}
@@ -117,13 +124,16 @@ const Cart = ({ navigation }) => {
 			<FlatList
 				data={cart}
 				keyExtractor={(item, index) => index}
-				renderItem={({ item }) => {
+				renderItem={({ item, index }) => {
 					const newdata = books && books.find((itm) => itm.id === item.id);
 					return (
 						<AppCartItem
 							imglink={newdata.imglink}
 							name={newdata.name}
 							price={"€" + newdata.price}
+							removeitm={() => {
+								removeitmfun(index);
+							}}
 						/>
 					);
 				}}
@@ -133,7 +143,7 @@ const Cart = ({ navigation }) => {
 			<View style={styles.line} />
 			<View style={styles.NetTotal}>
 				<Text style={styles.TotalCart}>Gesamtpreis</Text>
-				<Text style={styles.TotalCart2}>€{totalPrice}</Text>
+				<Text style={styles.TotalCart2}>€ {parseInt(totalPrice)}</Text>
 			</View>
 			<Text style={styles.paymentEtc}>
 				Das ist eine Einmalzahlung, kein Abo.

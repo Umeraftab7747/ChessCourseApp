@@ -24,7 +24,7 @@ const Profile = ({ navigation }) => {
 	const logoutFunct = async () => {
 		await auth.signOut();
 		// dispatch(setAuth({ auth: null }));
-		navigation.replace("Login");
+		// navigation.replace("Login");
 	};
 	return (
 		<View style={styles.MainCart}>

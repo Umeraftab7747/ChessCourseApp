@@ -23,7 +23,7 @@ const Login = ({ navigation }) => {
 				.signInWithEmailAndPassword(email, passowrd)
 				.then((doc) => {
 					console.log("doc", doc.user.uid);
-					navigation.replace("MyTabs");
+					// navigation.replace("MyTabs");
 				})
 				.catch((e) => {
 					alert(e.message);
