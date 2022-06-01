@@ -76,7 +76,7 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = parseInt(newtotal) + parseInt(datas.price);
+					newtotal = parseFloat(newtotal) + parseFloat(datas.price);
 					console.log(newtotal);
 					settotalPrice(newtotal);
 				}
@@ -93,7 +93,7 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = parseInt(newtotal) + parseInt(datas.price);
+					newtotal = parseFloat(newtotal) + parseFloat(datas.price);
 					console.log(newtotal);
 					settotalPrice(newtotal);
 				}
@@ -143,7 +143,7 @@ const Cart = ({ navigation }) => {
 			<View style={styles.line} />
 			<View style={styles.NetTotal}>
 				<Text style={styles.TotalCart}>Gesamtpreis</Text>
-				<Text style={styles.TotalCart2}>€ {parseInt(totalPrice)}</Text>
+				<Text style={styles.TotalCart2}>€ {totalPrice}</Text>
 			</View>
 			<Text style={styles.paymentEtc}>
 				Das ist eine Einmalzahlung, kein Abo.
