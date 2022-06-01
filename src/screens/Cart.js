@@ -76,7 +76,9 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = parseFloat(newtotal) + parseFloat(datas.price);
+					newtotal =
+						parseFloat(newtotal).toFixed(2) +
+						parseFloat(datas.price).toFixed(2);
 					console.log(newtotal);
 					settotalPrice(newtotal);
 				}
@@ -93,7 +95,9 @@ const Cart = ({ navigation }) => {
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal = parseFloat(newtotal) + parseFloat(datas.price);
+					newtotal =
+						parseFloat(newtotal).toFixed(2) +
+						parseFloat(datas.price).toFixed(2);
 					console.log(newtotal);
 					settotalPrice(newtotal);
 				}
