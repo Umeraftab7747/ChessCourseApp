@@ -72,7 +72,7 @@ export function MyTabs() {
 				name='ChatSupport'
 				component={ChatSupport}
 				options={{
-					tabBarLabel: "Plaudern",
+					tabBarLabel: "Chat",
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name='chat' color={color} size={26} />
 					),
