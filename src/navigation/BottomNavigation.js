@@ -9,15 +9,41 @@ import ChatSupport from "../screens/ChatSupport";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import { auth, db } from "../Database/firebaseConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../store/authSlice";
-import { setChat } from "../store/projectSlice";
+import { setChat, setBuyBooks } from "../store/projectSlice";
 export function MyTabs() {
 	const dispatch = useDispatch();
+	const getUnique = (array) => {
+		let uniqueArray = [];
+		array.filter((element) => {
+			const isDuplicate = uniqueArray.find((item) => item.id === element.id);
+
+			if (!isDuplicate) {
+				uniqueArray.push(element);
+			}
+		});
+
+		return uniqueArray;
+	};
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
 				const uid = user.uid;
+				db.collection("confirmOrder")
+					// .where("userid", uid)
+					.onSnapshot(async (snapshot) => {
+						let newbooks = [];
+						await snapshot.docs.map((doc) => ({
+							newbooks: newbooks.push(...doc.data().books),
+						}));
+						const rendring = await getUnique(newbooks);
+						dispatch(
+							setBuyBooks({
+								buybooks: rendring,
+							})
+						);
+					});
 				db.collection("userinfo")
 					.doc(uid)
 					.get()

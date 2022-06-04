@@ -5,6 +5,7 @@ const initialState = {
 	books: [],
 	cart: [],
 	mesg: {},
+	buybooks: [],
 };
 
 export const projectSlice = createSlice({
@@ -16,6 +17,13 @@ export const projectSlice = createSlice({
 				state.books = [];
 			} else {
 				state.books = action.payload.books;
+			}
+		},
+		setBuyBooks: (state, action) => {
+			if (action.payload.buybooks === null) {
+				state.buybooks = [];
+			} else {
+				state.buybooks = action.payload.buybooks;
 			}
 		},
 		setMsgs: (state, action) => {
@@ -42,6 +50,7 @@ export const projectSlice = createSlice({
 	},
 });
 
-export const { setBooks, setMsgs, setCart, setChat } = projectSlice.actions;
+export const { setBooks, setMsgs, setCart, setChat, setBuyBooks } =
+	projectSlice.actions;
 
 export default projectSlice.reducer;

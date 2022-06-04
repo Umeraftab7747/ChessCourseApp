@@ -17,6 +17,7 @@ import { setBooks, setChat } from "../store/projectSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../store/authSlice";
 import PaymentMethod from "../screens/PaymentMethod";
+import OwnCources from "../screens/OwnCources";
 const Stack = createNativeStackNavigator();
 
 function Stacknavigation() {
@@ -68,6 +69,7 @@ function Stacknavigation() {
 						description: doc.data().description,
 						imglink: doc.data().imglink,
 						price: doc.data().price,
+						playList: doc.data().playList,
 					})),
 				})
 			);
@@ -88,6 +90,7 @@ function Stacknavigation() {
 				/>
 				<Stack.Screen name='MyTabs' component={MyTabs} />
 				<Stack.Screen name='PaymentMethod' component={PaymentMethod} />
+				<Stack.Screen name='OwnCources' component={OwnCources} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

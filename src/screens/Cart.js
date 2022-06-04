@@ -46,12 +46,15 @@ const Cart = ({ navigation }) => {
 						name: isAuth.name,
 						userid: isAuth.userid,
 					},
+					userid: isAuth.userid,
 					createdAt: new Date(),
 				})
 				.then(() => {
 					//payment successfully
 					alert("Zahlung erfolgreich abgeschlossen.");
 					dispatch(setCart({ cart: [] }));
+					settotalPrice(parseFloat(0.0).toFixed(2));
+
 					toggleModal();
 				});
 		} else if (data.title === "cancel") {
@@ -72,35 +75,35 @@ const Cart = ({ navigation }) => {
 	useEffect(() => {
 		// setInterval(() => {
 		if (books.length > 0 && cart.length > 0) {
-			let newtotal = 0;
+			let newtotal = 0.0;
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal =
-						parseFloat(newtotal).toFixed(2) +
-						parseFloat(datas.price).toFixed(2);
-					console.log(newtotal);
-					settotalPrice(newtotal);
+					// newtotal =
+					// 	parseFloat(newtotal) +
+					// 	parseFloat(datas.price).toFixed(2);
+					const newprice = parseFloat(datas.price);
+					// newtotal = parseFloat(newtotal + newprice).toFixed(2);
+					newtotal = newtotal + newprice;
 				}
+				settotalPrice(parseFloat(newtotal).toFixed(2));
 			});
-		} else {
-			settotalPrice(0);
 		}
 		// }, 5000);
 	}, [cart]);
 
 	useLayoutEffect(() => {
 		if (books.length > 0 && cart.length > 0) {
-			let newtotal = 0;
+			let newtotal = 0.0;
 			cart.map((dat, index) => {
 				let datas = books.find((itm) => itm.id === dat.id);
 				if (datas) {
-					newtotal =
-						parseFloat(newtotal).toFixed(2) +
-						parseFloat(datas.price).toFixed(2);
-					console.log(newtotal);
-					settotalPrice(newtotal);
+					const newprice = parseFloat(datas.price);
+					// newtotal = parseFloat(newtotal + newprice).toFixed(2);
+					newtotal = newtotal + newprice;
 				}
+				settotalPrice(parseFloat(newtotal).toFixed(2));
+
 				// settotalPrice(newtotal);
 			});
 		}

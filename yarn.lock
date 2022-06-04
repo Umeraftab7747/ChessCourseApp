@@ -6088,6 +6088,11 @@ react-native-vector-icons@^9.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
+react-native-vimeo-iframe@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-vimeo-iframe/-/react-native-vimeo-iframe-1.1.0.tgz#264680f7def6d478e00f56a7b0133252cac8fa2b"
+  integrity sha512-Z7sHR0ZHRPgRcTMPCZaHisHJHInkfKCCYL8Ifhyu5vN6xul4ZfrvFXCx3cmpAhI/3YCcfgr03q5kkQ8LOucS+A==
+
 react-native-web@0.17.7:
   version "0.17.7"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.17.7.tgz#038899dbc94467a0ca0be214b88a30e0c117b176"

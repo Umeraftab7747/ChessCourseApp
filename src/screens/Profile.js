@@ -70,11 +70,15 @@ const Profile = ({ navigation }) => {
 				<Text style={{ ...styles.nameFields2, textTransform: "capitalize" }}>
 					{isAuth?.name !== "" ? isAuth?.name : "username"}
 				</Text>
-
 				<Text style={styles.nameFields}>Email</Text>
 				<Text style={styles.nameFields2}>
 					{isAuth?.email !== "" ? isAuth?.email : "email"}
 				</Text>
+
+				<Appbutton
+					name={"Eigene Kurse"}
+					onPress={() => navigation.navigate("OwnCources")}
+				/>
 				<Appbutton name={"Ausloggen"} onPress={logoutFunct} />
 			</View>
 		</View>
