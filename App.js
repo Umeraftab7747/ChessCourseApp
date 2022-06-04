@@ -19,6 +19,7 @@ export default function App() {
 		"A non-serializable value was detected in the state",
 		"AsyncStorage has been extracted from",
 		"new NativeEventEmitter()` was called",
+		"ImmutableStateInvariantMiddleware took",
 		"Can't perform a React state update on an unmounted component. ",
 	]);
 	return (
