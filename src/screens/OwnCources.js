@@ -29,7 +29,7 @@ const OwnCources = ({ navigation }) => {
 					return (
 						<AppCard
 							name={newdata.name}
-							price={"schaue"}
+							price={"Anschauen"}
 							imglink={newdata.imglink}
 							onPress={() =>
 								togleModal(newdata.playList ? newdata.playList : "")

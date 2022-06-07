@@ -69,7 +69,7 @@ const Dashboard = ({ navigation }) => {
 						<View style={styles.TextInputContainer}>
 							<TextInput
 								style={styles.TextInputMainDesgin}
-								placeholder={"Search"}
+								placeholder={"Suche"}
 								onChangeText={(text) => setsearchtxt(text)}
 							/>
 						</View>
